@@ -111,6 +111,7 @@ jobs:
           cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ../artifact/package/
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ../artifact/buildinfo/
           cp $(ls -1 ../artifact/firmware/*img*) ../release/$DEVICE.img.gz
+          zip -q -r ../release/package.zip ../artifact/package/
           pushd ../release/ && md5sum $DEVICE.img.gz > md5sum.txt && popd
           echo "strDate=$(date +%Y-%m-%d)" >> $GITHUB_ENV
           echo "strDevice=$(echo $DEVICE | awk '{print toupper($0)}')" >> $GITHUB_ENV
